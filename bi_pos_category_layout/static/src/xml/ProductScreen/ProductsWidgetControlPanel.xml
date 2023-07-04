@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="bi_pos_category_layout" inherit_id="point_of_sale.template" xml:space="preserve">
+    <t t-name="ProductsWidgetControlPanel" t-inherit="point_of_sale.ProductsWidgetControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='!props.hasNoCategories']" position="replace">
+            <t t-if="!props.hasNoCategories">
+                <div class="rightpane-header">
+                    <button class="left-button" type="button" t-on-click="() => this.trigger('left-button', 0)">
+                        <span style="font-size: initial;" class="fa fa-chevron-left" aria-hidden="true"/>
+                    </button>
+                    <button class="right-button" type="button" t-on-click="() => this.trigger('left-button', 0)">
+                        <span style="font-size: initial;" class="fa fa-chevron-right" aria-hidden="true"/>
+                    </button>
+                </div>
+
+                <t t-if="props.subcategories.length > 0 and displayCategImages">
+                    <div class="categories">
+                        <div class="category-list-scroller">
+                            <div class="category-list">
+                                <t t-foreach="props.subcategories" t-as="category" t-key="category.id">
+                                    <CategoryPanel category="category" />
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </t>
+</templates>

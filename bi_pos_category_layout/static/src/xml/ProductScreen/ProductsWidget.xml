@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="bi_pos_category_layout" inherit_id="point_of_sale.template" xml:space="preserve">
+    <t t-name="ProductsWidget" t-inherit="point_of_sale.ProductsWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('product-list-container')]" position="before">
+
+            <t t-if="state1.toggle">
+                <div style="box-sizing: border-box;position: absolute;margin-top: 50px;right: 0;width: 25%;overflow: auto;top: 0px;bottom: 0;
+                    border-right: solid 1px #CECBCB;border-right: solid 3px #787878;background: #f0eeee;">
+                    <div style="background: #d3d3d3; border-bottom: solid 3px rgb(110, 200, 155);max-height: 48px;">
+                        <HomeCategory subcategories="subcategories" currentCat="breadcrumbs[breadcrumbs.length - 1]"/>
+                    </div>
+                    <t t-if="env.pos.company.custom_layout == '1'">
+                        <t t-if="!env.isMobile">
+                            <div>
+                                <t t-foreach="breadcrumbs" t-as="category" t-key="category.id">
+                                    <span class="category-simple" t-on-click="() => this.trigger('switch-category', category.id)">
+                                        <t t-esc="category.name" />
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+                        <t t-if="subcategories.length > 0">
+                            <div>
+                                <t t-foreach="subcategories" t-as="category" t-key="category.id">
+                                    <span class="category-simple" t-on-click="() => this.trigger('switch-category', category.id)">
+                                        <t t-esc="category.name" />
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <t t-if="!env.isMobile">
+                            <div style="display: grid; grid-template-columns: auto 1fr;">
+                                <t t-foreach="breadcrumbs" t-as="category" t-key="category.id">
+                                    <span class="category-simple-two" t-on-click="() => this.trigger('switch-category', category.id)">
+                                        <t t-esc="category.name" />
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+                        <t t-if="subcategories.length > 0">
+                            <div style="display: grid; grid-template-columns: auto 1fr;">
+                                <t t-foreach="subcategories" t-as="category" t-key="category.id">
+                                    <span class="category-simple-two" t-on-click="() => this.trigger('switch-category', category.id)">
+                                        <t t-esc="category.name" />
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

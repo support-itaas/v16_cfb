@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="HomeCategory" owl="1">
+        <span class="breadcrumb" style="border-right: 0px solid #c5c5c5;float: none;">
+            <span t-if="!env.isMobile" class="breadcrumb-button breadcrumb-home"
+                  t-on-click="() => this.trigger('switch-category', 0)">
+                <i class="fa fa-home" role="img" aria-label="Home" title="Home"/>
+            </span>
+            <span t-if="env.isMobile" class="breadcrumb-button breadcrumb-home"
+                  t-on-click="() => this.trigger('switch-category', props.subcategories)">
+                <t t-if="env.pos.get('selectedCategoryId') === 0">
+                    All
+                </t>
+                <t t-else="">
+                    <t t-esc="props.currentCat.name"/>
+                </t>
+            </span>
+        </span>
+    </t>
+
+</templates>
